@@ -1,30 +1,22 @@
 class Solution {
-    public int[] twoSum(int[] nums, int target) {
-        int i=0, j=1;
-        int[] out={0,0};
-        if(checkConstrains(nums, target)) {
-            System.out.println("Constrains Unsatisfied");
-            return out;
-        }
-        String ret = "";
-        while(nums[i]+nums[j]!=target && j<nums.length && i<nums.length-1) 
-            if(nums[i]+nums[j]>target) i++;
-            else j++;
-        ret = i+""+j;
-        out = new int[ret.length()];
-        for(i=0; i<ret.length(); i++) 
-            out[i] = Integer.parseInt(ret.charAt(i)+"");
-        return out;
-    }
-    public boolean checkConstrains(int[] nums, int target) {
-        if(!(target>=-(int)Math.pow(10,9) && target>=(int)Math.pow(10,9)))
-            return false;
-        if(!(nums.length>=2 && nums.length<=10000))
-            return false;
-        for(int i=0; i<nums.length; i++) 
-            if(!(nums[i]>=-(int)Math.pow(10,9) && nums[i]>=(int)Math.pow(10,9)))
-                return false;
+    public int getNextIndex(int[] nums, int elem, int index) {
+        for (int i = 0; i < nums.length && i!=index; i++)
+            if (nums[i] == elem && i!=index) return i;
             else continue;
-        return true;
+        return -1;
+    }
+
+    public int[] twoSum(int[] nums, int target) {
+        String s = "";
+        System.out.println(nums[0]);
+        for (int i = 0; i < nums.length && s.equals(""); i++) {
+            if (getNextIndex(nums, (target - nums[i]), i) != -1) 
+                s += i+" "+getNextIndex(nums, (target - nums[i]), i);
+            else
+                continue;
+        }
+        String[] temp = s.split(" ");
+        int[] ret = {Integer.parseInt(temp[0]), Integer.parseInt(temp[1])};
+        return ret;
     }
 }
