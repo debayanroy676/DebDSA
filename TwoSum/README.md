@@ -29,10 +29,5 @@ Output: [0,1]
     -109 <= target <= 109
     Only one valid answer exists.
 
- 
-Follow-up: Can you come up with an algorithm that is less than O(n2) time complexity?
-
-
-
 # Solution
-The above problem is solved at O(n) time complexity.
+The above problem is solved at O(n²) time complexity.
