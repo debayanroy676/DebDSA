@@ -1,0 +1,4 @@
+[INBUILT]  This file serves as a sacrificial-lamb in my C journey
+[WRITE]  Hello World (write test passed)
+[WRITE]  Hello World (write test 2)
+[WRITE]  C is a grandpa language
