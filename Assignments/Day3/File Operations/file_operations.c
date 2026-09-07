@@ -13,24 +13,28 @@ int main() {
         printf("5. for exit\n");
         printf("Enter your choice : ");
         scanf("%d", &choice);
+        int c;
+        while ((c = getchar()) != '\n' && c != EOF);
         switch (choice) {
-            case 1: 
+            case 1: {
                 fp = fopen("assets/asset.txt", "r");
-                while(!feof(fp)) {
-                    fgets(refer, 1000, fp);
+                while(fgets(refer, 1000, fp) != NULL) 
                     printf("[READ]  %s", refer);
-                }
+                fclose(fp);
                 break;
-            case 2: 
+            }
+            case 2: { 
                 fp = fopen("assets/asset.txt", "a");
                 fprintf(fp, "[WRITE]  ");
                 printf("Enter your write : ");
                 fflush(stdin);
                 fgets(refer, 1000, stdin);
                 fprintf(fp, refer);
+                fclose(fp);
                 break;
-            case 3:
-                bin = fopen("assets/asset.bin", "rb+");
+            }
+            case 3: {
+                bin = fopen("assets/asset.bin", "rb");
                 int ch;
                 printf("[READ]  ");
                 while((ch = fgetc(bin))!=EOF) {
@@ -38,22 +42,30 @@ int main() {
                     if((char)ch=='\n')  printf("[READ]  ");
                     else continue;
                 }
-                break;
-            case 4 :
-                i=0;
-                bin = fopen("assets/asset.bin", "ab");
-                printf("Enter your write : ");
-                fgets(refer, 1000, stdin);
-                char* write = refer;
-                fwrite(write, sizeof(char), strlen(write), bin);
-                break;
-            case 5:
-                printf("Exit Successfully");
-                fclose(fp);
                 fclose(bin);
                 break;
-            default:
+            }
+            case 4 : {
+                bin = fopen("assets/asset.bin", "ab+");
+                printf("Enter your write : ");
+                fflush(stdin);
+                struct nameholder {
+                    char name[50];
+                };
+                struct nameholder myname;
+                fgets(myname.name, 50, stdin);
+                fflush(stdin);
+                fwrite(myname.name, sizeof(char), 50, bin);
+                fclose(bin);
+                break;
+            }
+            case 5: {
+                printf("Exit Successfully");
+                break;
+            }
+            default: {
                 printf("Invalid Input\n");
+            }
         }
     } while(choice!=5);
     
